@@ -23,6 +23,7 @@ module.exports = {
           text:'插件构成',
           items: [
             { text: "插件实现", link: "/dev/pluginsimpl.md" },
+            { text: "插件描述清单", link: "/dev/pluginsdesc.md" },
           ],
         },
       ],
