@@ -17,7 +17,7 @@ module.exports = {
       "/dev/": [
         {
           text:'概述',
-          link: "/dev/pluginsimpl.md"
+          link: "/dev/index.md"
         },
         {
           text:'插件构成',
