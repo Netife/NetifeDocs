@@ -6,19 +6,19 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "首页", link: "/" }, 
+      { text: "开发", link: "/dev/" }, 
     ],
-    socialLinks: [{ icon: "github", link: "https://github.com/Netife/NetifeDocs" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/Netife" }],
     footer: {
       message: "Released under the GPLV3 License.",
       copyright: "Copyright © 2023",
     },
-    // 配置从导航栏进去后的侧边栏
     sidebar: {
       "/dev/": [
         {
-          text:'开发',
+          text:'插件构成',
           items: [
-            { text: "插件开发", link: "/dev/plugins/" },
+            { text: "插件实现", link: "/dev/pluginsimpl.md" },
           ],
         },
       ],
