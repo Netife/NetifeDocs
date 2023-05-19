@@ -16,6 +16,10 @@ module.exports = {
     sidebar: {
       "/dev/": [
         {
+          text:'概述',
+          link: "/dev/pluginsimpl.md"
+        },
+        {
           text:'插件构成',
           items: [
             { text: "插件实现", link: "/dev/pluginsimpl.md" },
