@@ -25,6 +25,13 @@ module.exports = {
             { text: "插件实现", link: "/dev/pluginsimpl.md" },
             { text: "插件描述清单", link: "/dev/pluginsdesc.md" },
           ],
+        },       
+        {
+          text:'插件开发',
+          items: [
+            { text: "c++插件开发  ", link: "/dev/cppplugindev.md" },
+            { text: "js脚本开发", link: "/dev/jsscriptdev.md" },
+          ],
         },
       ],
     },
