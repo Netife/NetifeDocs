@@ -80,7 +80,22 @@ void pocoUninitializeLibrary()
 
 ## 编译插件
 
-请以**SHARED**的方式编译插件，在插件模板中已经提供了对应的 CMAKELISTS 文化。
+请以**SHARED**的方式编译插件，在插件模板中已经提供了对应的 CMAKELISTS 文件。
+```cmake
+cmake_minimum_required(VERSION 3.25)
+project(NetifeCppPluginTemplateV1)
+
+set(CMAKE_CXX_STANDARD 23)
+
+find_package(Poco REQUIRED Foundation)
+
+add_library(NetifeCppPluginTemplateV1
+        include/plugins/v1/NetifePlugins.h
+        include/plugins/v1/NetifePluginAgent.h
+        library.h
+        library.cpp DemoClass.cpp DemoClass.h)
+target_link_libraries(NetifeCppPluginTemplateV1 PRIVATE Poco::Foundation)
+```
 
 ::: warning
 如果你使用的是 Clion，你可能需要将 CMAKE 的解释器等换成 VS 的，并且将 Vcpkg 以工具链的形式添加到 CMake 执行参数。
@@ -178,3 +193,44 @@ void pocoUninitializeLibrary()
 
 # 插件 Hook 开发
 
+Hook的表现形式是若干的节点，他表示的是框架或者插件运行的某个自定义节点。
+
+Hook节点可以在 Netife Ref 中找到，以下提供一个示例写法：
+
+### 注册清单
+
+```json
+"registerHook":[
+	{
+		"node":"netife.network.receive",
+		"symbol":"Test"
+	}
+]
+```
+
+### 实现
+
+你可以在任意一个 CPP 源文件来声明这个函数，并且以 C 方式导出，具体示例可以参见 C++ 插件模板。
+
+```c++
+#include "library.h"
+
+#include <iostream>
+#include "include/plugins/v1/NetifePluginAgent.h"
+#if defined(_WIN32)
+#define LIBRARY_API __declspec(dllexport)
+#else
+#define LIBRARY_API
+#endif
+extern "C" void LIBRARY_API Test(NetifePluginAgent* agent);
+
+void Test(NetifePluginAgent* agent) {
+    agent->LogInfo("Hello, This symbol has been hooked!!!");
+    //Todo something...
+    //这个地方可以执行具体的过程，注，关于 Hook 的具体定义需要在 Netife Develop Guide 查看，确保函数原型一样
+}
+```
+
+::: tip
+函数原型应该在 Netife Ref 中查找，此外，你应该保证声明的 Symbol 和函数名称一样。
+:::
